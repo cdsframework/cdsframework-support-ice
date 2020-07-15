@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.cdsframework.cds.util.CdsObjectFactory;
 import org.opencds.vmr.v1_0.schema.AdministrableSubstance;
+import org.opencds.vmr.v1_0.schema.BL;
 import org.opencds.vmr.v1_0.schema.CD;
 import org.opencds.vmr.v1_0.schema.IVLTS;
 import org.opencds.vmr.v1_0.schema.ObservationResult;
@@ -241,6 +242,42 @@ public class IceCdsObjectFactory {
             String idRoot,
             String idExtension,
             List<SubstanceAdministrationEvent> components) {
+		
+		return getSubstanceAdministrationEvent(substanceCode,
+											   substanceOid,
+											   administrationTimeInterval,
+											   idRoot,
+											   idExtension,
+											   null,
+											   components);
+	}
+	
+	
+    /**
+     * Add a SubstanceAdministrationEvent to the CDS object.This method is an ICE specific implementation for simplifying the adding of a SubstanceAdministrationEvent to the CDS object.
+     *
+     * The substanceCode is from the Config.getCodeSystemOid("VACCINE") configured code system OID.
+     *
+     * @see SubstanceAdministrationEvent
+     * @see org.cdsframework.util.support.cds.Config
+     * @param substanceCode the substance code
+     * @param substanceOid the substance code oid
+     * @param administrationTimeInterval the date time of the substance administration
+     * @param idRoot a unique ID identifying this particular administration event
+     * @param idExtension the unique ID root
+	 * @param isValid dose override flag (true/false/null)
+     * @param components a list of the vaccine components represented by SubstanceAdministrationEvent objects
+     * @return a properly constructed SubstanceAdministrationEvent with an ObservationResult on it
+     */
+    public static SubstanceAdministrationEvent getSubstanceAdministrationEvent(
+            String substanceCode,
+            String substanceOid,
+            String administrationTimeInterval,
+            String idRoot,
+            String idExtension,
+			Boolean isValid,
+            List<SubstanceAdministrationEvent> components) {
+		
         SubstanceAdministrationEvent substanceAdministrationEvent
                 = CdsObjectFactory.getSubstanceAdministrationEvent(substanceCode, null, substanceOid, null, administrationTimeInterval, administrationTimeInterval);
         if (idRoot != null && !idRoot.trim().isEmpty()) {
@@ -249,6 +286,11 @@ public class IceCdsObjectFactory {
         if (idExtension != null && !idExtension.trim().isEmpty()) {
             substanceAdministrationEvent.getId().setExtension(idExtension);
         }
+		if (isValid != null) {
+			BL blIsValue = new BL();
+			blIsValue.setValue(isValid);
+			substanceAdministrationEvent.setIsValid(blIsValue);
+		}
 
         List<RelatedClinicalStatement> relatedClinicalStatements = substanceAdministrationEvent.getRelatedClinicalStatement();
         if (components != null) {

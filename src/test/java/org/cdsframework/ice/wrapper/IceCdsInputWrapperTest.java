@@ -86,6 +86,18 @@ public class IceCdsInputWrapperTest {
                 "08", Config.getCodeSystemOid("VACCINE"),
                 "20080223",
                 "12346", Config.getCodeSystemOid("ADMINISTRATION_ID"));
+        iceCdsInputWrapper.addSubstanceAdministrationEvent(
+                "151", Config.getCodeSystemOid("VACCINE"),
+                "20080223",
+                "12347", Config.getCodeSystemOid("ADMINISTRATION_ID"), true);
+        iceCdsInputWrapper.addSubstanceAdministrationEvent(
+                "47", Config.getCodeSystemOid("VACCINE"),
+                "20080223",
+                "12347", Config.getCodeSystemOid("ADMINISTRATION_ID"), false);
+        iceCdsInputWrapper.addSubstanceAdministrationEvent(
+                "28", Config.getCodeSystemOid("VACCINE"),
+                "20080223",
+                "12347", Config.getCodeSystemOid("ADMINISTRATION_ID"), null);
         iceCdsInputWrapper.addImmunityObservationResult(new Date(), null,
                 "070.30", Config.getCodeSystemOid("DISEASE"),
                 "DISEASE_DOCUMENTED", Config.getCodeSystemOid("IMMUNITY_VALUE"),
