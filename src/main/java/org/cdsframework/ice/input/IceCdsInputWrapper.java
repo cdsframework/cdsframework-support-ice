@@ -264,7 +264,7 @@ public class IceCdsInputWrapper {
 	 * @param administrationDate the date time of the substance administration
 	 * @param idRoot a unique ID identifying this particular administration event
 	 * @param idExtension the unique ID root
-	 * @param isValid dose override flag (null will not isValid tag to CDS object)
+	 * @param isValid dose override flag (null will not add isValid tag to VMR)
 	 * @return a properly constructed SubstanceAdministrationEvent
 	 */
     public SubstanceAdministrationEvent addSubstanceAdministrationEvent(
@@ -315,7 +315,7 @@ public class IceCdsInputWrapper {
 	 * @param administrationTime the date time of the substance administration
 	 * @param idRoot a unique ID identifying this particular administration event
 	 * @param idExtension the unique ID root
-	 * @param isValid dose override flag (null will not isValid tag to CDS object)
+	 * @param isValid dose override flag (null will not add isValid tag to VMR)
 	 * @return a properly constructed SubstanceAdministrationEvent 
 	 */
     public SubstanceAdministrationEvent addSubstanceAdministrationEvent(

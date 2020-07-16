@@ -265,7 +265,7 @@ public class IceCdsObjectFactory {
      * @param administrationTimeInterval the date time of the substance administration
      * @param idRoot a unique ID identifying this particular administration event
      * @param idExtension the unique ID root
-	 * @param isValid dose override flag (true/false/null)
+	 * @param isValid dose override flag (null will not add isValid tag to VMR)
      * @param components a list of the vaccine components represented by SubstanceAdministrationEvent objects
      * @return a properly constructed SubstanceAdministrationEvent with an ObservationResult on it
      */
