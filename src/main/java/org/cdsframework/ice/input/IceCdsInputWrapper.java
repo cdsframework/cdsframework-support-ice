@@ -234,6 +234,16 @@ public class IceCdsInputWrapper {
         cdsInputWrapper.setPatientBirthTime(birthDate);
     }
 
+	/**
+	 * Add a SubstanceAdministrationEvent to the CDS object.
+	 * 
+	 * @param substanceCode the substance code
+	 * @param substanceCodeOid the substance code oid
+	 * @param administrationDate the date time of the substance administration
+	 * @param idRoot a unique ID identifying this particular administration event
+	 * @param idExtension the unique ID root
+	 * @return a properly constructed SubstanceAdministrationEvent
+	 */
     public SubstanceAdministrationEvent addSubstanceAdministrationEvent(
             String substanceCode,
             String substanceCodeOid,
@@ -246,6 +256,40 @@ public class IceCdsInputWrapper {
                 idRoot, idExtension);
     }
 
+	/**
+	 * Add a SubstanceAdministrationEvent to the CDS object.
+	 * 
+	 * @param substanceCode the substance code
+	 * @param substanceCodeOid the substance code oid
+	 * @param administrationDate the date time of the substance administration
+	 * @param idRoot a unique ID identifying this particular administration event
+	 * @param idExtension the unique ID root
+	 * @param isValid dose override flag (null will not add isValid tag to VMR)
+	 * @return a properly constructed SubstanceAdministrationEvent
+	 */
+    public SubstanceAdministrationEvent addSubstanceAdministrationEvent(
+            String substanceCode,
+            String substanceCodeOid,
+            Date administrationDate,
+            String idRoot,
+            String idExtension,
+			Boolean isValid) {
+        return addSubstanceAdministrationEvent(
+                substanceCode, substanceCodeOid,
+                DateUtils.getISODateFormat(administrationDate),
+                idRoot, idExtension, isValid);
+    }
+
+	/**
+	 * Add a SubstanceAdministrationEvent to the CDS object.
+	 * 
+	 * @param substanceCode the substance code
+	 * @param substanceCodeOid the substance code oid
+	 * @param administrationTime the date time of the substance administration
+	 * @param idRoot a unique ID identifying this particular administration event
+	 * @param idExtension the unique ID root
+	 * @return a properly constructed SubstanceAdministrationEvent 
+	 */
     public SubstanceAdministrationEvent addSubstanceAdministrationEvent(
             String substanceCode,
             String substanceCodeOid,
@@ -258,6 +302,36 @@ public class IceCdsInputWrapper {
                 administrationTime,
                 idRoot,
                 idExtension,
+                null);
+        cdsInputWrapper.addSubstanceAdministrationEvent(substanceAdministrationEvent);
+        return substanceAdministrationEvent;
+    }
+
+	/**
+	 * Add a SubstanceAdministrationEvent to the CDS object.
+	 * 
+	 * @param substanceCode the substance code
+	 * @param substanceCodeOid the substance code oid
+	 * @param administrationTime the date time of the substance administration
+	 * @param idRoot a unique ID identifying this particular administration event
+	 * @param idExtension the unique ID root
+	 * @param isValid dose override flag (null will not add isValid tag to VMR)
+	 * @return a properly constructed SubstanceAdministrationEvent 
+	 */
+    public SubstanceAdministrationEvent addSubstanceAdministrationEvent(
+            String substanceCode,
+            String substanceCodeOid,
+            String administrationTime,
+            String idRoot,
+            String idExtension,
+			Boolean isValid) {
+        SubstanceAdministrationEvent substanceAdministrationEvent = IceCdsObjectFactory.getSubstanceAdministrationEvent(
+                substanceCode,
+                substanceCodeOid,
+                administrationTime,
+                idRoot,
+                idExtension,
+				isValid,
                 null);
         cdsInputWrapper.addSubstanceAdministrationEvent(substanceAdministrationEvent);
         return substanceAdministrationEvent;
